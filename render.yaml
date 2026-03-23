@@ -12,7 +12,7 @@ services:
         value: production
 
   # Frontend Client
-  - type: static
+  - type: static_site
     name: mini-crm-client
     env: static
     buildCommand: cd client && npm install && npm run build
