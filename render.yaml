@@ -2,7 +2,7 @@ services:
   # Backend Server
   - type: web
     name: mini-crm-server
-    env: node
+    runtime: node
     buildCommand: npm install && cd server && npm install
     startCommand: cd server && node index.js
     envVars:
@@ -12,11 +12,11 @@ services:
         value: production
 
   # Frontend Client
-  - type: static_site
+  - type: web
     name: mini-crm-client
-    env: static
+    runtime: static
     buildCommand: cd client && npm install && npm run build
     staticPublishPath: client/dist
     envVars:
       - key: VITE_API_BASE_URL
-        value: https://mini-crm-server.onrender.com # IMPORTANT: Update this after server deployment
+        value: https://mini-crm-server.onrender.com
