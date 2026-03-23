@@ -1,0 +1,16 @@
+{
+  "name": "mini-crm",
+  "version": "1.0.0",
+  "description": "LeadSync Mini CRM",
+  "scripts": {
+    "install-all": "npm install && cd server && npm install && cd ../client && npm install",
+    "seed": "node server/seed.js",
+    "server": "cd server && node index.js",
+    "client": "cd client && npm run dev",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "cd server && node index.js"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
