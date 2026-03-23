@@ -10,6 +10,7 @@ import {
   Users, UserPlus, UserCheck, UserX, Download, 
   Diamond, Sparkles, Target, Hexagon 
 } from 'lucide-react';
+import { API_BASE_URL } from '../api/config';
 
 const Dashboard = () => {
   const [stats, setStats] = useState(null);
@@ -19,7 +20,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const resp = await axios.get('http://localhost:5001/api/leads/stats');
+        const resp = await axios.get(`${API_BASE_URL}/api/leads/stats`);
         setStats(resp.data);
       } catch (err) {
         console.error(err);
@@ -49,7 +50,7 @@ const Dashboard = () => {
           <h1 style={{ fontSize: '28px', fontWeight: '700' }}>Business Dashboard</h1>
           <p style={{ color: 'var(--text-muted)' }}>Welcome back! Here's an overview of your leads.</p>
         </div>
-        <button onClick={() => window.location.href = 'http://localhost:5001/api/export'} className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <button onClick={() => window.location.href = `${API_BASE_URL}/api/export`} className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <Download size={18} /> Export CSV
         </button>
       </div>

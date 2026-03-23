@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Search, Plus, Edit2, Trash2, Filter } from 'lucide-react';
+import { API_BASE_URL } from '../api/config';
 
 const Leads = () => {
   const [leads, setLeads] = useState([]);
@@ -19,7 +20,7 @@ const Leads = () => {
 
   const fetchLeads = async () => {
     try {
-      const resp = await axios.get(`http://localhost:5001/api/leads?search=${search}&status=${statusFilter}`);
+      const resp = await axios.get(`${API_BASE_URL}/api/leads?search=${search}&status=${statusFilter}`);
       setLeads(resp.data);
     } catch (err) {
       console.error(err);
@@ -43,9 +44,9 @@ const Leads = () => {
     e.preventDefault();
     try {
       if (editingLead) {
-        await axios.put(`http://localhost:5001/api/leads/${editingLead.id}`, formData);
+        await axios.put(`${API_BASE_URL}/api/leads/${editingLead.id}`, formData);
       } else {
-        await axios.post('http://localhost:5001/api/leads', formData);
+        await axios.post(`${API_BASE_URL}/api/leads`, formData);
       }
       setShowModal(false);
       fetchLeads();
@@ -57,7 +58,7 @@ const Leads = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this lead?')) {
       try {
-        await axios.delete(`http://localhost:5001/api/leads/${id}`);
+        await axios.delete(`${API_BASE_URL}/api/leads/${id}`);
         if (showModal) setShowModal(false);
         fetchLeads();
       } catch (err) {

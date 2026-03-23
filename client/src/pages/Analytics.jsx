@@ -5,6 +5,7 @@ import {
   PieChart, Pie, Cell, Legend
 } from 'recharts';
 import { TrendingUp, Users, Target, CheckCircle } from 'lucide-react';
+import { API_BASE_URL } from '../api/config';
 
 const Analytics = () => {
   const [stats, setStats] = useState(null);
@@ -14,7 +15,7 @@ const Analytics = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const resp = await axios.get('http://localhost:5001/api/leads/stats');
+        const resp = await axios.get(`${API_BASE_URL}/api/leads/stats`);
         setStats(resp.data);
       } catch (err) {
         console.error(err);

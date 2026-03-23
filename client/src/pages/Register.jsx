@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE_URL } from '../api/config';
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    username: '', emai: '', password: '', phone: '', source: 'Google Search'
+    username: '', email: '', password: '', phone: '', source: 'Google Search'
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -19,7 +20,7 @@ const Register = () => {
     setError('');
     setLoading(true);
     try {
-      await axios.post('http://localhost:5001/api/auth/register', formData);
+      await axios.post(`${API_BASE_URL}/api/auth/register`, formData);
       navigate('/login');
     } catch (err) {
       setError(err.response?.data?.error || 'Registration failed');
